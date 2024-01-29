@@ -22,19 +22,19 @@
                 </a>
             </li>            
             <li class="nav-item">
-                <a class="nav-link " href="{{url('/')}}">
+                <a class="nav-link " href="{{route('category.list')}}">
                     <i class="bi bi-grid"></i>
                     <span>Categories</span>
                 </a>
             </li>            
             <li class="nav-item">
-                <a class="nav-link " href="{{url('/')}}">
+                <a class="nav-link " href="{{route('brand.list')}}">
                     <i class="bi bi-grid"></i>
                     <span>Brands</span>
                 </a>
             </li>            
             <li class="nav-item">
-                <a class="nav-link " href="{{url('/')}}">
+                <a class="nav-link " href="{{route('product.list')}}">
                     <i class="bi bi-grid"></i>
                     <span>Products</span>
                 </a>
