@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\BrandController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Backend\BrandController;
+use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\HomeController;
+use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+//admin panel routes
 
 Route::get('/',[HomeController::class, 'home'])->name('dashboard');
 
@@ -35,3 +37,6 @@ Route::post('/brand/store', [BrandController::class, 'store'])->name('brand.stor
 Route::get('/product/list', [ProductController::class, 'list'])->name('product.list');
 Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
 Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
+
+
+//website routes

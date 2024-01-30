@@ -42,7 +42,7 @@
             <li class="nav-item">
                 <a class="nav-link " href="{{url('/')}}">
                     <i class="bi bi-grid"></i>
-                    <span>Orders</span>
+                    <span>Order Details</span>
                 </a>
             </li>            
 
