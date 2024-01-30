@@ -34,6 +34,7 @@ class CategoryController extends Controller
         if($validate->fails())
         {
             // dd($validate->getMessageBag());
+            notify()->error('Please enter the information.');
             return redirect()->back();
         }
        
