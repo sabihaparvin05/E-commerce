@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
+use Mckenziearts\Notify\LaravelNotifyServiceProvider;
 
 return [
 
@@ -165,7 +166,7 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        Mckenziearts\Notify\LaravelNotifyServiceProvider::class,
+        LaravelNotifyServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,

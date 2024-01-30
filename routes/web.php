@@ -37,5 +37,3 @@ Route::post('/brand/store', [BrandController::class, 'store'])->name('brand.stor
 Route::get('/product/list', [ProductController::class, 'list'])->name('product.list');
 Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
 Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
-
-//website routes
