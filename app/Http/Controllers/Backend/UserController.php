@@ -61,4 +61,43 @@ class UserController extends Controller
         notify()->success('User created Successful.');
         return redirect()->route('users.list');
     }
+
+    public function loginForm()
+    {
+        return view('admin.pages.loginForm');
+    }
+
+    public function loginPost(Request $request)
+    {
+        // dd($request->all());
+        $validate = Validator::make($request->all(),[
+
+            'email'=>'required|email',
+            'password'=>'required|min:6',
+        ]);
+
+        if($validate->fails())
+        {
+            notify()->error('Invalid Credentials.');
+            return redirect()->back();
+        }
+
+        $credentials=$request->except('_token');
+
+        $login=auth()->attempt($credentials);
+        if($login)
+        {   
+            notify()->success('Login Successful.');
+            return redirect()->route('dashboard');
+        }
+
+        notify()->error('Invalid user email or password.');
+        return redirect()->back();
+    }
+
+    public function logOut()
+    {
+        auth()->logout();
+        return redirect()->route('admin.login');
+    }
 }
