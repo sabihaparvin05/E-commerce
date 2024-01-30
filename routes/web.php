@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[HomeController::class, 'home'])->name('dashboard');
 
 
+
 Route::get('/login', [UserController::class, 'loginForm'])->name('admin.login');
 Route::post('/login-form-post', [UserController::class, 'loginPost'])->name('admin.login.post');
 
