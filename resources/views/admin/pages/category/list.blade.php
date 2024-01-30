@@ -6,7 +6,7 @@
         <div class="col">
             <h1>Category list</h1>
             <a class="btn btn-success mt-0 mb-3" href="{{route('create.category')}}">Create New Category</a>
-            <table class="table">
+            <table class="table table-dark">
                 <thead>
                     <tr>
                         <th scope="col">Serial</th>
