@@ -22,16 +22,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'admin'], function () {
 
-    Route::get('/home', [HomeController::class, 'home'])->name('dashboard');
-
-
-Route::get('/login', [UserController::class, 'loginForm'])->name('admin.login');
-Route::post('/login-form-post', [UserController::class, 'loginPost'])->name('admin.login.post');
+    Route::get('/login', [UserController::class, 'loginForm'])->name('admin.login');
+    Route::post('/login-form-post', [UserController::class, 'loginPost'])->name('admin.login.post');
 
     Route::group(['middleware' => 'auth'], function () {
         Route::group(['middleware' => 'CheckAdmin'], function () {
 
             Route::get('/logout', [UserController::class, 'logOut'])->name('admin.logout');
+            
+            Route::get('/home', [HomeController::class, 'home'])->name('dashboard');
 
             Route::get('/users/list', [UserController::class, 'list'])->name('users.list');
             Route::get('/create/user', [UserController::class, 'create'])->name('create.user');
