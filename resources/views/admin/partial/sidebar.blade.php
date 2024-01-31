@@ -3,7 +3,7 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link " href="{{url('/')}}">
+                <a class="nav-link " href="{{route('dashboard')}}">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
@@ -16,7 +16,7 @@
                 </a>
             </li>            
             <li class="nav-item">
-                <a class="nav-link " href="{{url('/')}}">
+                <a class="nav-link " href="">
                     <i class="bi bi-grid"></i>
                     <span>Orders</span>
                 </a>
@@ -40,7 +40,7 @@
                 </a>
             </li>            
             <li class="nav-item">
-                <a class="nav-link " href="{{url('/')}}">
+                <a class="nav-link " href="">
                     <i class="bi bi-grid"></i>
                     <span>Order Details</span>
                 </a>
