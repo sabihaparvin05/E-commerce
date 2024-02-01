@@ -24,7 +24,7 @@
                     <tr>
                         <th scope="row">{{$key+1}}</th>
                         <td>{{$user->name}}</td>
-                        <td>{{$user->role}}</td>
+                        <td>{{$user->role->name}}</td>
                         <td>0{{$user->phone}}</td>
                         <td>{{$user->email}}</td>
                         <td>{{$user->address}}</td>

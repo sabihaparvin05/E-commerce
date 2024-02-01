@@ -4,6 +4,7 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\HomeController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,7 +30,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::group(['middleware' => 'CheckAdmin'], function () {
 
             Route::get('/logout', [UserController::class, 'logOut'])->name('admin.logout');
-            
+
             Route::get('/home', [HomeController::class, 'home'])->name('dashboard');
 
             Route::get('/users/list', [UserController::class, 'list'])->name('users.list');
@@ -47,6 +48,17 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/product/list', [ProductController::class, 'list'])->name('product.list');
             Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
             Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
+
+            Route::group(['prefix' => 'role', 'as' => 'role.'], function () {
+                Route::get('/list', [RoleController::class, 'list'])->name('list');
+                Route::get('/create', [RoleController::class, 'create'])->name('create');
+                Route::post('/store', [RoleController::class, 'store'])->name('store');
+                Route::get('/edit/{id}', [RoleController::class, 'edit'])->name('edit');
+                Route::post('/update/{id}', [RoleController::class, 'update'])->name('update');
+                Route::get('/delete/{id}', [RoleController::class, 'delete'])->name('delete');
+            });
+
+            Route::get('/role/assign/{id}', [RoleController::class, 'roleAssign'])->name('role.assign');
         });
     });
 });

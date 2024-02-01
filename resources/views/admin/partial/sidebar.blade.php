@@ -45,7 +45,12 @@
                     <span>Order Details</span>
                 </a>
             </li>            
-
+            <li class="nav-item">
+                <a class="nav-link " href="{{route('role.list')}}">
+                    <i class="bi bi-grid"></i>
+                    <span>Role</span>
+                </a>
+            </li>            
 
             <!-- dropdown
             <li class="nav-item">
