@@ -12,7 +12,7 @@ class UserController extends Controller
 {
     public function list()
     {
-        $users = User::all();
+        $users = User::with('role')->get();
         return view('admin.pages.users.list', compact('users'));
     }
 

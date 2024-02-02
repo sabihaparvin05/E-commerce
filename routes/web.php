@@ -4,6 +4,7 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\HomeController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Frontend\HomeController as FrontendHomeController;
 use App\Http\Controllers\Frontend\CustomerController as FrontendCustomerController;
@@ -37,7 +38,6 @@ Route::get('/profile', [FrontendCustomerController::class, 'profile'])->name('cu
 
 Route::group(['prefix' => 'admin'], function () {
 
-
     Route::get('/login', [UserController::class, 'loginForm'])->name('admin.login');
     Route::post('/login-form-post', [UserController::class, 'loginPost'])->name('admin.login.post');
 
@@ -47,6 +47,8 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/home', [HomeController::class, 'home'])->name('dashboard');
 
             Route::get('/logout', [UserController::class, 'logOut'])->name('admin.logout');
+
+            Route::get('/home', [HomeController::class, 'home'])->name('dashboard');
 
             Route::get('/users/list', [UserController::class, 'list'])->name('users.list');
             Route::get('/create/user', [UserController::class, 'create'])->name('create.user');
@@ -63,7 +65,18 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/product/list', [ProductController::class, 'list'])->name('product.list');
             Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
             Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
-        });
+
+            Route::group(['prefix' => 'role', 'as' => 'role.'], function () {
+                Route::get('/list', [RoleController::class, 'list'])->name('list');
+                Route::get('/create', [RoleController::class, 'create'])->name('create');
+                Route::post('/store', [RoleController::class, 'store'])->name('store');
+                Route::get('/edit/{id}', [RoleController::class, 'edit'])->name('edit');
+                Route::post('/update/{id}', [RoleController::class, 'update'])->name('update');
+                Route::get('/delete/{id}', [RoleController::class, 'delete'])->name('delete');
+            });
+
+            Route::get('/role/assign/{id}', [RoleController::class, 'roleAssign'])->name('role.assign');
+            });
     });
 });
 
