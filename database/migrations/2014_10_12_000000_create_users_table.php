@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('role');
-            $table->integer('phone');
+            $table->integer('phone')->nullable();
             $table->string('email')->unique();
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->string('image')->nullable();
             $table->string('password');
             $table->rememberToken();

@@ -5,6 +5,8 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\HomeController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Frontend\HomeController as FrontendHomeController;
+use App\Http\Controllers\Frontend\CustomerController as FrontendCustomerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,17 +20,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//wesite routes
+
+Route::get('/', [FrontendHomeController::class, 'home'])->name('frontend.home');
+
+Route::get('/registration', [FrontendCustomerController::class, 'registration'])->name('customer.registration');
+Route::post('/reg-form-post', [FrontendCustomerController::class, 'store'])->name('registration.store');
+
+Route::get('/login', [FrontendCustomerController::class, 'login'])->name('customer.login');
+Route::post('/login-post', [FrontendCustomerController::class, 'loginPost'])->name('customer.loginPost');
+Route::get('/logout', [FrontendCustomerController::class, 'logout'])->name('customer.logout');
+Route::get('/profile', [FrontendCustomerController::class, 'profile'])->name('customer.profile');
+
+
 //admin panel routes
 
 Route::group(['prefix' => 'admin'], function () {
 
-    Route::get('/home', [HomeController::class, 'home'])->name('dashboard');
 
     Route::get('/login', [UserController::class, 'loginForm'])->name('admin.login');
     Route::post('/login-form-post', [UserController::class, 'loginPost'])->name('admin.login.post');
 
     Route::group(['middleware' => 'auth'], function () {
         Route::group(['middleware' => 'CheckAdmin'], function () {
+
+            Route::get('/home', [HomeController::class, 'home'])->name('dashboard');
 
             Route::get('/logout', [UserController::class, 'logOut'])->name('admin.logout');
 
@@ -53,4 +69,3 @@ Route::group(['prefix' => 'admin'], function () {
 
 
 
-//wesite routes

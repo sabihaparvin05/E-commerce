@@ -31,7 +31,7 @@
         </div>
         <div class="row align-items-center py-3 px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
-                <a href="" class="text-decoration-none">
+                <a href="{{route('frontend.home')}}" class="text-decoration-none">
                     <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
                 </a>
             </div>
@@ -102,7 +102,7 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="index.html" class="nav-item nav-link active">Home</a>
+                            <a href="{{route('frontend.home')}}" class="nav-item nav-link active">Home</a>
                             <a href="shop.html" class="nav-item nav-link">Shop</a>
                             <a href="detail.html" class="nav-item nav-link">Shop Detail</a>
                             <div class="nav-item dropdown">
@@ -114,10 +114,18 @@
                             </div>
                             <a href="contact.html" class="nav-item nav-link">Contact</a>
                         </div>
+                    @guest
                         <div class="navbar-nav ml-auto py-0">
-                            <a href="" class="nav-item nav-link">Login</a>
-                            <a href="" class="nav-item nav-link">Register</a>
-                        </div>
+                            <a href="{{route('customer.login')}}" class="nav-item nav-link">Login</a>
+                            <a href="{{route('customer.registration')}}" class="nav-item nav-link">Register</a>
+                    @endguest
+                    @auth
+                        <div class="navbar-nav ml-auto py-0">
+                            <a href="{{route('customer.logout')}}" class="nav-item nav-link">Logout</a>
+                            <a href="{{route('customer.profile')}}" class="nav-item nav-link">Profile|{{auth()->user()->name}} ({{ auth()->user()->role }})</a>
+                
+                    @endauth
+                    </div>
                     </div>
                 </nav>
                 <div id="header-carousel" class="carousel slide" data-ride="carousel">
