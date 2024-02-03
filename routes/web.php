@@ -1,8 +1,10 @@
 <?php
 
+use App\Console\Commands\Permission;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\HomeController;
+use App\Http\Controllers\Backend\PermissionController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\UserController;
@@ -48,8 +50,6 @@ Route::group(['prefix' => 'admin'], function () {
 
             Route::get('/logout', [UserController::class, 'logOut'])->name('admin.logout');
 
-            Route::get('/home', [HomeController::class, 'home'])->name('dashboard');
-
             Route::get('/users/list', [UserController::class, 'list'])->name('users.list');
             Route::get('/create/user', [UserController::class, 'create'])->name('create.user');
             Route::post('/store/user', [UserController::class, 'store'])->name('store.user');
@@ -75,7 +75,8 @@ Route::group(['prefix' => 'admin'], function () {
                 Route::get('/delete/{id}', [RoleController::class, 'delete'])->name('delete');
             });
 
-            Route::get('/role/assign/{id}', [RoleController::class, 'roleAssign'])->name('role.assign');
+            Route::get('/permission-assign/{role_id}', [PermissionController::class, 'permission'])->name('role.assign');
+            Route::post('/permission-assign/{role_id}', [PermissionController::class, 'assignPermission'])->name('assign.permission');
             });
     });
 });

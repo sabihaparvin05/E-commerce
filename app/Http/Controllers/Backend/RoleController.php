@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Console\Commands\Permission;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -81,9 +82,4 @@ class RoleController extends Controller
         return redirect()->back();
     }
 
-    public function roleAssign($id)
-    {
-        $roleAssign = Role::find($id);
-        return view('admin.pages.role.assign', compact('roleAssign'));
-    }
 }
