@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -18,7 +18,66 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('admin.pages.users.create');
+        $roles = Role::all();
+        return view('admin.pages.users.create',compact('roles'));
+    }
+
+    public function view($id)
+    {
+        $users = User::find($id);
+        return view('admin.pages.users.view', compact('users'));
+    }
+
+
+    public function edit($id)
+    {
+        $users =User::find($id);
+        return view('admin.pages.users.edit', compact('users'));
+    }
+
+
+    public function update(Request $request, $id)
+    {
+        // dd($request->all());
+        $users = User::find($id);
+
+        if($users)
+        {
+            $fileName = $users->image;
+
+            if($request->hasFile('image'))
+            {
+                $file = $request->file('image');
+                $fileName = date('Ymdhis').'.'.$file->getClientOriginalExtension();
+
+                $file->storeAs('/uploads', $fileName);
+            }
+
+            $users -> update([
+                'name'=> $request-> user_name,
+                'email'=> $request-> user_email,
+                'phone'=> $request-> phone,
+                'phone'=> $request-> phone,
+                'address'=> $request-> address,
+                'image'=> $fileName,
+            ]);
+
+            notify()->success('Profile updated successfully.');
+            return redirect()->route('users.list');
+        }
+    }
+
+
+    public function delete($id)
+    {
+        $users = User::find($id);
+
+        if($users)
+        {
+            $users->delete();
+        }
+        notify()->success('User deleted successfully.');
+        return redirect()->back();
     }
 
     public function store(Request $request)
@@ -27,7 +86,7 @@ class UserController extends Controller
 
         $validate = Validator::make($request->all(), [
             'user_name' => 'required',
-            'role' => 'required',
+            'role_id' => 'required',
             'user_email' => 'required|email',
             'phone' => 'required|max:11',
             'address' => 'required',
@@ -50,7 +109,7 @@ class UserController extends Controller
 
         User::create([
             'name' => $request->user_name,
-            'role' => $request->role,
+            'role_id' => $request->role_id,
             'image' => $fileName,
             'phone' => $request->phone,
             'email' => $request->user_email,

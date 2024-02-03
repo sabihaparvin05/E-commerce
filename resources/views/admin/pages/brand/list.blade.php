@@ -29,8 +29,8 @@
                         <td>{{$brand->description}}</td>
                         <td>{{$brand->status}}</td>
                         <td>
-                            <a class="btn btn-success" href="">Edit</a>
-                            <a class="btn btn-danger" href="">Delete</a>
+                            <a class="btn btn-success" href="{{route('brand.edit',$brand->id)}}">Edit</a>
+                            <a class="btn btn-danger" href="{{route('brand.delete',$brand->id)}}">Delete</a>
                         </td>
                     </tr>
 

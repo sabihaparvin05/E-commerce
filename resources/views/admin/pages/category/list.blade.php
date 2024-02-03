@@ -11,6 +11,7 @@
                     <tr>
                         <th scope="col">Serial</th>
                         <th scope="col">Name</th>
+                        <th scope="col">Description</th>
                         <th scope="col">Status</th>
                         <th scope="col">Action</th>
                     </tr>
@@ -21,11 +22,12 @@
                     <tr>
                         <th scope="row">{{$key+1}}</th>
                         <td>{{$category->name}}</td>
+                        <td>{{$category->description}}</td>
                         <td>{{$category->status}}</td>
                         <td>
-                            <a href="" class="btn btn-success">View</a>
-                            <a href="" class="btn btn-warning">Edit</a>
-                            <a href="" class="btn btn-danger">Delete</a>
+                            <a href="{{route('category.view', $category->id)}}" class="btn btn-success">View</a>
+                            <a href="{{route('category.edit', $category->id)}}" class="btn btn-warning">Edit</a>
+                            <a href="{{route('category.delete', $category->id)}}" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                     @endforeach

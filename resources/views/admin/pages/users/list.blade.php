@@ -29,12 +29,17 @@
                         <td>{{$user->email}}</td>
                         <td>{{$user->address}}</td>
                         <td>
-                            <img style="border-radius: 60px;" width="15%" src="{{url('/uploads/'.$user->image)}}" alt="image">
+                            <img style="border-radius: 60px;" width="15%" 
+                            @if($user->image)
+                            <img src="{{url('/uploads/'.$user->image)}}">
+                            @else
+                            <img style="height: 10px; width:min-content;" src="{{ url('/uploads/noimage.png') }}">
+                            @endif
                         </td>
                         <td>
-                            <a class="btn btn-primary" href="#">View</a>
-                            <a class="btn btn-success" href="#">Edit</a>
-                            <a class="btn btn-danger" href="#">Delete</a>
+                            <a class="btn btn-primary" href="{{route('user.view', $user->id)}}">View</a>
+                            <a class="btn btn-success" href="{{route('user.edit', $user->id)}}">Edit</a>
+                            <a class="btn btn-danger" href="{{route('user.delete', $user->id)}}">Delete</a>
                         </td>
                     </tr>
                     @endforeach

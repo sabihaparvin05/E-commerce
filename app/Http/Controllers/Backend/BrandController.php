@@ -11,7 +11,7 @@ class BrandController extends Controller
 {
     public function list()
     {
-        $brands = Brand::all();        
+        $brands = Brand::all();
         return view('admin.pages.brand.list', compact('brands'));
     }
 
@@ -23,7 +23,8 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        $validate = Validator::make($request->all(),
+        $validate = Validator::make(
+            $request->all(),
             [
                 'brand_name' => 'required',
                 'description' => 'required',
@@ -53,5 +54,51 @@ class BrandController extends Controller
 
         notify()->success('Brand create successful.');
         return redirect()->route('brand.list');
+    }
+
+
+    public function edit($id)
+    {
+        $brands = Brand::find($id);
+        return view('admin.pages.brand.edit', compact('brands'));
+    }
+
+
+    public function update(Request $request, $id)
+    {
+        $brands = Brand::find($id);
+
+        if ($brands) {
+            $fileName = $brands->logo;
+
+            if ($request->hasFile('logo')) {
+                $file = $request->file('logo');
+                $fileName = date('Ymdhis') . '.' . $file->getClientOriginalExtension();
+                $file->storeAs('/uploads', $fileName);
+            }
+
+            $brands->update([
+                'name' => $request->name,
+                'logo' => $fileName,
+                'description' => $request->description,
+            ]);
+
+            notify()->success('Brands updated successfully.');
+            return redirect()->route('brand.list');
+        }
+    }
+
+
+    public function delete($id)
+    {
+        $brands = Brand::find($id);
+
+        if($brands)
+        {
+            $brands->delete();
+        }
+
+        notify()->success('Brands deleted successfully.');
+        return redirect()->back();
     }
 }

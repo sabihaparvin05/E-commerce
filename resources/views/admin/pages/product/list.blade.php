@@ -16,6 +16,7 @@
                         <th scope="col">Product Image</th>
                         <th scope="col">Product Price</th>
                         <th scope="col">Product Stock</th>
+                        <th scope="col">Product Description</th>
                         <th scope="col">Product Status</th>
                         <th scope="col">Handle</th>
                     </tr>
@@ -32,11 +33,12 @@
                         </td>
                         <td>{{$product->price}} .BDT</td>
                         <td>{{$product->stock}}</td>
+                        <td>{{$product->description}}</td>
                         <td>{{$product->status}}</td>
                         <td>
-                            <a class="btn btn-success" href="">View</a>
-                            <a class="btn btn-danger" href="">Delete</a>
-                            <a class="btn btn-primary" href="">Edit</a>
+                            <a class="btn btn-success" href="{{route('product.view',$product->id)}}">View</a>
+                            <a class="btn btn-primary" href="{{route('product.edit',$product->id)}}">Edit</a>
+                            <a class="btn btn-danger" href="{{route('product.delete',$product->id)}}">Delete</a>
                         </td>
                     </tr>
 
