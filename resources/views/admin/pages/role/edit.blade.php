@@ -5,6 +5,8 @@
 <form action="{{route('role.update', $roles->id)}}" method="post">
     @csrf
 
+    @method('put')
+    
     <div class="form-group">
         <label for="">Enter Roles Name:</label>
         <input value="{{$roles->name}}" required type="text" class="form-control" id="" placeholder="Enter name" name="name">

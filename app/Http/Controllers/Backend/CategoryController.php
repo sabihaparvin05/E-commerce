@@ -40,10 +40,53 @@ class CategoryController extends Controller
        
             Category::create([
                 'name'=>$request->category_name,
-                'description'=>$request->category_description
+                'description'=>$request->category_description,
             ]);
 
             notify()->success('Created successful.');
             return redirect()->route('category.list');
+    }
+
+    public function view($id)
+    {
+        $category = Category::find($id);
+        return view('admin.pages.category.view', compact('category'));
+    }
+
+
+    public function edit($id)
+    {
+        $category = Category::find($id);
+        return view('admin.pages.category.edit', compact('category'));
+    }
+
+
+    public function update(Request $request, $id)
+    {
+        $category = Category::find($id);
+
+        if($category)
+        {
+            $category->update([
+                'name'=>$request->name,
+                'description'=>$request->description,
+                'status'=>$request->status,
+            ]);
+            notify()->success('Category updated successfully.');
+            return redirect()->route('category.list');
+        }
+    }
+
+
+    public function delete($id)
+    {
+        $category = Category::find($id);
+
+        if($category)
+        {
+            $category->delete();
+        }
+        notify()->success('Category deleted successfully.');
+        return redirect()->back();
     }
 }
