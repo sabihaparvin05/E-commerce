@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -22,12 +23,12 @@ class CustomerController extends Controller
 
     public function store(Request $request)
     {
-
+        $role = Role::where('name', 'customer')->first();
     //dd($request->all());
     User::Create([
         'name'=>$request->name,
         'email'=>$request->email,
-        'role'=>'customer',
+        'role_id'=>$role->id,
         'phone'=>$request->phone,
         'password'=>bcrypt($request->password),
     ]);

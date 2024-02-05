@@ -72,7 +72,7 @@
                             <label style="font-weight:bold;">Role</label>
                         </div>
                         <div class="col-md-8 col-6">
-                            {{ auth()->user()->role }}
+                            {{ auth()->user()->role->name }}
                         </div>
                     </div>
                     </hr>

@@ -50,7 +50,7 @@ class UserController extends Controller
 
         User::create([
             'name' => $request->user_name,
-            'role' => $request->role,
+            'role_id'=>$request->role,
             'image' => $fileName,
             'phone' => $request->phone,
             'email' => $request->user_email,
