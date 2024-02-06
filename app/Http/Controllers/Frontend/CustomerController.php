@@ -20,7 +20,41 @@ class CustomerController extends Controller
         return view('frontend.pages.customer.profile');
     }
 
+    public function profileEdit($userId)
+    {
+        $users=User::find($userId);
+        return view('frontend.pages.customer.profileEdit',compact('users'));
+    }
 
+    public function profileUpdate(Request $request, $userId)
+    {
+        $users=User::find($userId);
+        // dd($request->all());
+
+        if($users)
+        {
+            $fileName=$users->image;
+
+            if($request->hasFile('image'))
+            {
+              $file=$request->file('image');
+              $fileName=date('Ymdhis').'.'.$file->getClientOriginalExtension();
+              $file->storeAs('/uploads',$fileName);
+
+            }
+        }
+        $users->update([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'phone'=>$request->phone,
+            'password'=>bcrypt($request->password),
+            'image'=>$fileName,
+        ]);
+
+     notify()->success('Updated successfully.');
+    return redirect()->route('frontend.home');
+
+    }
     public function store(Request $request)
     {
         $role = Role::where('name', 'customer')->first();

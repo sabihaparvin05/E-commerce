@@ -10,6 +10,9 @@ use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Frontend\HomeController as FrontendHomeController;
 use App\Http\Controllers\Frontend\CustomerController as FrontendCustomerController;
+use App\Http\Controllers\Frontend\OrderController as FrontendOrderController;
+use App\Http\Controllers\Frontend\ProductController as FrontendProductController;
+use App\Http\Controllers\Frontend\CartController as FrontendCartController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,15 +30,23 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontendHomeController::class, 'home'])->name('frontend.home');
 
+Route::get('/search/products',[FrontendHomeController::class,'searchProduct'])->name('search.product');
+
 Route::get('/registration', [FrontendCustomerController::class, 'registration'])->name('customer.registration');
 Route::post('/reg-form-post', [FrontendCustomerController::class, 'store'])->name('registration.store');
 
 Route::get('/login', [FrontendCustomerController::class, 'login'])->name('customer.login');
 Route::post('/login-post', [FrontendCustomerController::class, 'loginPost'])->name('customer.loginPost');
-Route::get('/logout', [FrontendCustomerController::class, 'logout'])->name('customer.logout');
-Route::get('/profile', [FrontendCustomerController::class, 'profile'])->name('customer.profile');
 
+Route::get('/single-product/{id}', [FrontendProductController::class, 'singleProductView'])->name('single.product');
 
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/logout', [FrontendCustomerController::class, 'logout'])->name('customer.logout');
+
+    Route::get('/profile', [FrontendCustomerController::class, 'profile'])->name('customer.profile');
+    Route::get('/profile/edit/{id}',[FrontendCustomerController::class,'profileEdit'])->name('profile.edit');
+    Route::put('/profile/update/{id}',[FrontendCustomerController::class,'profileUpdate'])->name('profile.update');
+});
 //admin panel routes
 
 Route::group(['prefix' => 'admin'], function () {

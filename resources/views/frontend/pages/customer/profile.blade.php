@@ -13,7 +13,7 @@
                             <div class="image-container">
                                 <img src="{{url('/uploads/'. auth()->user()->image)}}" alt="Upload Image" class="rounded-circle" width="150">
                                 <div class="middle">
-                                    <a class="btn btn-success" href="">Edit</a>
+                                    <a class="btn btn-success" href="{{route('profile.edit',auth()->user()->id)}}">Edit</a>
                                 </div>
                             </div>
                             <div class="userData ml-3">
@@ -34,8 +34,6 @@
                         </div>
                     </div>
                     <hr />
-
-
 
                     <div class="row">
                         <div class="col-sm-3 col-md-2 col-5">
@@ -85,8 +83,6 @@
                 </div>
 
             </div>
-
-
         </div>
 
     </div>
