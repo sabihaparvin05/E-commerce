@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col">
             <h1>Product list</h1>
-            <a class="btn btn-success mt-0 mb-3" href="{{route('product.create')}}">Create New Category</a>
+            <a class="btn btn-success mt-0 mb-3" href="{{route('product.create')}}">Create New product</a>
             <table class="table table-dark">
                 <thead>
                     <tr>
