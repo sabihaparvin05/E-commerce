@@ -40,6 +40,10 @@ Route::post('/login-post', [FrontendCustomerController::class, 'loginPost'])->na
 
 Route::get('/single-product/{id}', [FrontendProductController::class, 'singleProductView'])->name('single.product');
 
+
+Route::get('/cart-view',[FrontendCartController::class,'viewCart'])->name('cart.view');
+
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/logout', [FrontendCustomerController::class, 'logout'])->name('customer.logout');
 

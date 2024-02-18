@@ -10,7 +10,7 @@ class ProductController extends Controller
 {
     public function singleProductView($productId)
     {
-        $singleProduct=Product::find($productId);
+        $singleProduct=Product::with(['category','brand'])->find($productId);
 
         return view('frontend.pages.product.productView',compact('singleProduct'));
     }
