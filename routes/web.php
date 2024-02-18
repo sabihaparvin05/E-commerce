@@ -26,7 +26,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//wesite routes
+//website routes
+Route::group(['middleware'=>'locale'],function(){
+
+Route::get('/change-lang/{locale}',[FrontendHomeController::class,'changeLang'])->name('change.lang');
+
 
 Route::get('/', [FrontendHomeController::class, 'home'])->name('frontend.home');
 
@@ -112,4 +116,5 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('/permission-assign/{role_id}', [PermissionController::class, 'assignPermission'])->name('assign.permission');
         });
     });
+});
 });

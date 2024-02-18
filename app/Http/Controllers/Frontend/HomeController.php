@@ -29,6 +29,14 @@ class HomeController extends Controller
       return view('frontend.pages.search.searchProduct',compact('products'));
      
     }
+
+
+    public function changeLang($locale)
+        {
+            app()->setLocale($locale);
+            session()->put('locale',$locale);
+            return redirect()->route('frontend.home');
+    }
 }
 
 
