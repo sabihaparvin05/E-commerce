@@ -43,11 +43,11 @@ class UserController extends Controller
 
         if($users)
         {
-            $fileName = $users->image;
+            $fileName = $users->user_image;
 
-            if($request->hasFile('image'))
+            if($request->hasFile('user_image'))
             {
-                $file = $request->file('image');
+                $file = $request->file('user_image');
                 $fileName = date('Ymdhis').'.'.$file->getClientOriginalExtension();
 
                 $file->storeAs('/uploads', $fileName);

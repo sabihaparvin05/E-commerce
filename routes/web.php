@@ -30,7 +30,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontendHomeController::class, 'home'])->name('frontend.home');
 
-Route::get('/search/products',[FrontendHomeController::class,'searchProduct'])->name('search.product');
+Route::get('/search/products', [FrontendHomeController::class, 'searchProduct'])->name('search.product');
 
 Route::get('/registration', [FrontendCustomerController::class, 'registration'])->name('customer.registration');
 Route::post('/reg-form-post', [FrontendCustomerController::class, 'store'])->name('registration.store');
@@ -48,9 +48,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/logout', [FrontendCustomerController::class, 'logout'])->name('customer.logout');
 
     Route::get('/profile', [FrontendCustomerController::class, 'profile'])->name('customer.profile');
-    Route::get('/profile/edit/{id}',[FrontendCustomerController::class,'profileEdit'])->name('profile.edit');
-    Route::put('/profile/update/{id}',[FrontendCustomerController::class,'profileUpdate'])->name('profile.update');
+    Route::get('/profile/edit/{id}', [FrontendCustomerController::class, 'profileEdit'])->name('profile.edit');
+    Route::put('/profile/update/{id}', [FrontendCustomerController::class, 'profileUpdate'])->name('profile.update');
 });
+
+
+
 //admin panel routes
 
 Route::group(['prefix' => 'admin'], function () {
@@ -107,9 +110,6 @@ Route::group(['prefix' => 'admin'], function () {
 
             Route::get('/permission-assign/{role_id}', [PermissionController::class, 'permission'])->name('role.assign');
             Route::post('/permission-assign/{role_id}', [PermissionController::class, 'assignPermission'])->name('assign.permission');
-            });
+        });
     });
 });
-
-
-
