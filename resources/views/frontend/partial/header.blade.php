@@ -90,15 +90,15 @@
                         </div>
                         <a href="contact.html" class="nav-item nav-link">{{__('Contact')}}</a>
                     </div>
-                    @guest
+                    @guest('customerGuard')
                     <div class="navbar-nav ml-auto py-0">
                         <a href="{{route('customer.login')}}" class="nav-item nav-link">Login</a>
                         <a href="{{route('customer.registration')}}" class="nav-item nav-link">Register</a>
                         @endguest
-                        @auth
+                        @auth('customerGuard')
                         <div class="navbar-nav ml-auto py-0">
                             <a href="{{route('customer.logout')}}" class="nav-item nav-link">Logout</a>
-                            <a href="{{route('customer.profile')}}" class="nav-item nav-link">Profile|{{auth()->user()->name}} ({{ auth()->user()->role->name }})</a>
+                            <a href="{{route('customer.profile')}}" class="nav-item nav-link">Profile|{{auth('customerGuard')->user()->name}}</a>
 
                             @endauth
 

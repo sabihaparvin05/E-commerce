@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -59,11 +60,11 @@ class CustomerController extends Controller
     {
         $role = Role::where('name', 'customer')->first();
     //dd($request->all());
-    User::Create([
+    Customer::Create([
         'name'=>$request->name,
         'email'=>$request->email,
-        'role_id'=>$role->id,
-        'phone'=>$request->phone,
+        //'role'=>'customer',
+        //'phone'=>$request->phone,
         'password'=>bcrypt($request->password),
     ]);
 
@@ -94,7 +95,7 @@ class CustomerController extends Controller
         $credentials=$request->except('_token');
         // dd($credentials);
 
-        if(auth()->attempt($credentials))
+        if(auth('customerGuard')->attempt($credentials))
         {
             notify()->success('Login Successfull.');
             return redirect()->route('frontend.home');
