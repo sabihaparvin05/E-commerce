@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('image')->nullable();
             $table->string('email')->unique();
+            $table->integer('otp')->unique();
+            $table->boolean('is_verified')->default(false);
+            $table->dateTime('otp_expired_at')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->timestamps();

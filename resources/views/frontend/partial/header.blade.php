@@ -88,7 +88,7 @@
                                 <a href="checkout.html" class="dropdown-item">Checkout</a>
                             </div>
                         </div>
-                        <a href="contact.html" class="nav-item nav-link">{{__('Contact')}}</a>
+                        <a href="{{route('sendEmail')}}" class="nav-item nav-link">{{__('Contact')}}</a>
                     </div>
                     @guest('customerGuard')
                     <div class="navbar-nav ml-auto py-0">
