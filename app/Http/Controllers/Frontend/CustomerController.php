@@ -22,19 +22,19 @@ class CustomerController extends Controller
 
     public function profile()
     {
-        $user=Auth::guard('customerGuard')->user();
-        return view('frontend.pages.customer.profile',compact ('user'));
+        $user = Auth::guard('customerGuard')->user();
+        return view('frontend.pages.customer.profile', compact('user'));
     }
 
     public function profileEdit($userId)
     {
-        $users = User::find($userId);
+        $users = Customer::find($userId);
         return view('frontend.pages.customer.profileEdit', compact('users'));
     }
 
     public function profileUpdate(Request $request, $userId)
     {
-        $users = User::find($userId);
+        $users = Customer::find($userId);
         // dd($request->all());
 
         if ($users) {
@@ -50,7 +50,7 @@ class CustomerController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
-            'password' => bcrypt($request->password),
+            'address' =>$request->address,
             'image' => $fileName,
         ]);
 
@@ -99,14 +99,14 @@ class CustomerController extends Controller
                 // OTP expired
                 return redirect()->back()->with('error', 'OTP has expired. Please try again.');
             }
-    
+
             // OTP is valid and not expired
             $customer->is_verified = true;
-            $customer->save();  // Save the changes to the database
-    
+            $customer->save();
+
             notify()->success('OTP verified successfully. You can now log in.');
             return redirect()->route('customer.login');
-         } else {
+        } else {
             // Invalid OTP
             return redirect()->back()->with('error', 'Invalid OTP. Please try again.');
         }
@@ -135,13 +135,13 @@ class CustomerController extends Controller
 
         if (auth('customerGuard')->attempt($credentials)) {
             $user = auth('customerGuard')->user();
-           // dd($user);
+            // dd($user);
             if ($user->is_verified) {
-                
+
                 notify()->success('Logged in Successfully');
                 return redirect()->route('frontend.home');
             } else {
-                auth('customerGuard')->logout();  
+                auth('customerGuard')->logout();
                 notify()->error('User not verified');
                 return redirect()->route('customer.login');
             }

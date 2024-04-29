@@ -21,7 +21,7 @@
                                     </div>
                                 </div>
                                 <div class="userData ml-3">
-                                    <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold"><a href="javascript:void(0);">User:- {{auth()->user()->name}}</a></h2>
+                                    <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold"><a href="javascript:void(0);">User:- {{auth('customerGuard')->user()->name}}</a></h2>
                                     <h6 class="d-block"><a href="javascript:void(0)">20</a> Completed Orders</h6>
                                     <h6 class="d-block"><a href="javascript:void(0)">6</a> Pending Oders</h6>
                                 </div>
@@ -71,15 +71,7 @@
                     </div>
                     <hr />
 
-                    <div class="row">
-                        <div class="col-sm-3 col-md-2 col-5">
-                            <label style="font-weight:bold;">Role</label>
-                        </div>
-                        <div class="col-md-8 col-6">
-                            {{ auth()->user()->role->name }}
-                        </div>
-                    </div>
-                    </hr>
+                    
                         <div class="tab-pane fade" id="connectedServices" role="tabpanel" aria-labelledby="ConnectedServices-tab">
                             Facebook, Google, Twitter Account that are connected to this account
                         </div>
