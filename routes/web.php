@@ -46,6 +46,16 @@ Route::group(['middleware' => 'locale'], function () {
 
     Route::get('/login', [FrontendCustomerController::class, 'login'])->name('customer.login');
     Route::post('/login-post', [FrontendCustomerController::class, 'loginPost'])->name('customer.loginPost');
+    Route::get('/forget-password', [FrontendCustomerController::class, 'forgetPassword'])->name('forget.password');
+    Route::post('/reset-link', [FrontendCustomerController::class, 'resetLink'])->name('reset.link');
+
+    Route::get('/reset-password', [FrontendCustomerController::class, 'resetPasswordForm'])->name('reset.password.form');
+    Route::post('/update-password/{token}', [FrontendCustomerController::class, 'updatePassword'])->name('update.password');
+
+
+    
+    
+
 
 
     Route::get('/single-product/{id}', [FrontendProductController::class, 'singleProductView'])->name('single.product');

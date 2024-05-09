@@ -6,7 +6,9 @@ use Carbon\Carbon;
 use App\Models\Role;
 use App\Models\User;
 use App\Mail\sendOtp;
+use App\Mail\resetLink;
 use App\Models\Customer;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -156,4 +158,53 @@ class CustomerController extends Controller
         notify()->success('Logout Successful');
         return redirect()->route('customer.login');
     }
+
+    public function forgetPassword()
+    {
+        return view('frontend.pages.customer.resetEmailForm');
+    }
+
+    public function resetLink(Request $request)
+    {
+    
+        $customer=Customer::where('email',$request->email)->first();
+        $resetLink=Str::random(128);
+        if($customer){
+            Mail::to($request->email)->send(new resetLink($resetLink));
+            return ('Reset link is sent to your mail');
+        }else{
+            notify()->error('Email not found');
+            return redirect()->back();
+        }
+
+    }
+    public function resetPasswordForm()
+    {
+        return view('frontend.pages.customer.resetPasswordForm');
+    }
+    public function updatePassword(Request $request, $token )
+    {
+        $validate= Validator::make($request->all(),[
+            'new_password'=>'required|string|min:6|confirmed'
+        ]);
+
+        if($validate->fails()){
+            return redirect()->back()->withErrors($validate);
+        }
+
+        $customer=Customer::where('remember_token',$token)->first();
+
+        if(!$customer){
+            notify()->error('Invalid token');
+            return redirect()->back();
+        }
+        $customer->update([
+            'password' => bcrypt($request->new_password)
+        ]);
+        $customer->remember_token = null;
+        $customer->save();
+
+        return redirect()->route('customer.login')->with('success','Password updated successfully');
+    }
+
 }

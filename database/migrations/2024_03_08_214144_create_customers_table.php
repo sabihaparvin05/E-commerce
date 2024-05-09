@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->string('email')->unique();
+            $table->string('remember_token')->nullable();
             $table->integer('otp')->unique();
             $table->boolean('is_verified')->default(false);
             $table->dateTime('otp_expired_at')->nullable();
