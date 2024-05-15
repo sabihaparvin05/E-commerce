@@ -52,9 +52,15 @@
                 <i class="fas fa-heart text-primary"></i>
                 <span class="badge">0</span>
             </a>
-            <a href="" class="btn border">
+            <a href="{{route('cart.view')}}" class="btn border">
                 <i class="fas fa-shopping-cart text-primary"></i>
-                <span class="badge">0</span>
+                <span class="badge">
+                    @if(session()->has('vcart'))
+                    {{ count(session()->get('vcart')) }}
+                    @else
+                    0
+                    @endif
+                </span>
             </a>
         </div>
     </div>
@@ -84,8 +90,10 @@
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{__('Catagories')}}</a>
                             <div class="dropdown-menu rounded-0 m-0">
-                                <a href="cart.html" class="dropdown-item">Shopping Cart</a>
-                                <a href="checkout.html" class="dropdown-item">Checkout</a>
+                                @foreach($headerCategories as $category)
+                                <a href="{{route('products.under.category',$category->id)}}" class="dropdown-item">{{$category->name}}</a>
+                              
+                                @endforeach
                             </div>
                         </div>
                         <a href="{{route('sendEmail')}}" class="nav-item nav-link">{{__('Contact')}}</a>

@@ -18,8 +18,8 @@
                             </div>
                             <div class="userData ml-3">
                                 <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold"><a href="javascript:void(0);">User: {{auth('customerGuard')->user()->name}}</a></h2>
-                                <h6 class="d-block"><a href="javascript:void(0)"></a> Approved Bookings</h6>
-                                <h6 class="d-block"><a href="javascript:void(0)"></a> Pending Bookings</h6>
+                              <!--  <h6 class="d-block"><a href="javascript:void(0)"></a> Approved Bookings</h6>
+                                <h6 class="d-block"><a href="javascript:void(0)"></a> Pending Bookings</h6>-->
                             </div>
 
                         </div>

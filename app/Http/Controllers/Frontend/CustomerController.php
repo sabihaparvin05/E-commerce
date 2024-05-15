@@ -58,7 +58,7 @@ class CustomerController extends Controller
 
 
         notify()->success('Updated successfully.');
-        return redirect()->route('frontend.home');
+        return redirect()->back();
     }
     public function store(Request $request)
     {

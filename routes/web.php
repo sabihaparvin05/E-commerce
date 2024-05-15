@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\HomeController;
 use App\Http\Controllers\Backend\PermissionController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\RoleController;
+use App\Http\Controllers\Frontend\CategoryController as FrontendCategoryController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Frontend\HomeController as FrontendHomeController;
 use App\Http\Controllers\Frontend\CustomerController as FrontendCustomerController;
@@ -53,27 +54,26 @@ Route::group(['middleware' => 'locale'], function () {
     Route::post('/update-password/{token}', [FrontendCustomerController::class, 'updatePassword'])->name('update.password');
 
 
-    
-    
-
-
 
     Route::get('/single-product/{id}', [FrontendProductController::class, 'singleProductView'])->name('single.product');
 
+    Route::get('/product-under-cagtegory/{cat_id}',[FrontendCategoryController::class,'productsUnderCategory'])->name('products.under.category');
 
-    Route::get('/cart-view', [FrontendCartController::class, 'viewCart'])->name('cart.view');
 
     Route::get('/sendEmail', [FrontendContactController::class, 'sendEmail'])->name('sendEmail');
-   
-    
+
+
 
     Route::middleware('auth:customerGuard')->group(function () {
 
         Route::get('/logout', [FrontendCustomerController::class, 'logout'])->name('customer.logout');
+
         Route::get('/profile', [FrontendCustomerController::class, 'profile'])->name('customer.profile');
         Route::get('/profile/edit/{id}', [FrontendCustomerController::class, 'profileEdit'])->name('profile.edit');
         Route::put('/profile/update/{id}', [FrontendCustomerController::class, 'profileUpdate'])->name('profile.update');
 
+        Route::get('/cart-view', [FrontendCartController::class, 'viewCart'])->name('cart.view');
+        Route::get('/add-to-cart/{product_id}',[FrontendCartController::class,'addToCart'])->name('add.to.Cart');
 
     });
 
@@ -123,6 +123,8 @@ Route::group(['middleware' => 'locale'], function () {
                 Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
                 Route::put('/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
                 Route::get('/product/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
+
+
 
                 Route::group(['prefix' => 'role', 'as' => 'role.'], function () {
                     Route::get('/list', [RoleController::class, 'list'])->name('list');
