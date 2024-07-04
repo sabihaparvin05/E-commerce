@@ -13,59 +13,98 @@ class CartController extends Controller
         return view('frontend.pages.cart.cartView');
     }
 
-    public function addToCart($pId)
+    public function  addToCart($productId)
     {
-        $product=Product::find($pId);
+       $product = Product::find($productId);
+        $myCart = session()->get('cart');
 
-        $cart=session()->get('vcart');
-        if($cart){//not empty
-
-            if(array_key_exists($pId,$cart)){//yes
-                //qty update
-                $cart[$pId]['quantity']=$cart[$pId]['quantity'] + 1;
-                $cart[$pId]['subtotal']=$cart[$pId]['quantity'] * $cart[$pId]['price'];
-
-            session()->put('vcart',$cart);
-            notify()->success('Quantity updated.');
-            return redirect()->back();
-
-
-            }else{//no
-                //add to cart
-                $cart[$pId]=[
-                    'id'=>$pId,
-                    'name'=>$product->name,
-                    'price'=>$product->price,
-                    'quantity'=>1,
-                    'subtotal'=>1 * $product->price,
+        if (empty($myCart)) {
+            //1. add to cart
+            $newCart[$productId] = [
+                'id' => $productId,
+                'name' => $product->name,
+                'price' => $product->price,
+                'image' => $product->image,
+                'quantity' => 1,
+                'subtotal' => $product->price * 1
             ];
 
-            session()->put('vcart',$cart);
+            // dd($newCart);
+            session()->put('cart', $newCart);
             notify()->success('Product added to cart successfully.');
             return redirect()->back();
+        } else {
+            //check product exist or not
+            if (array_key_exists($productId, $myCart)) {
+                //update quantity
 
+
+                $myCart[$productId]['quantity'] = $myCart[$productId]['quantity'] + 1;
+                $myCart[$productId]['subtotal'] = $myCart[$productId]['quantity'] * $myCart[$productId]['price'];
+
+                session()->put('cart', $myCart);
+                notify()->success('Product quantity updated.');
+                return redirect()->back();
+            } else {
+
+                //add to cart new product
+                $myCart[$productId] = [
+                    'id' => $productId,
+                    'name' => $product->name,
+                    'price' => $product->price,
+                    'image' => $product->image,
+                    'quantity' => 1,
+                    'subtotal' => $product->price * 1
+                ];
+
+                session()->put('cart', $myCart);
+
+                notify()->success('New product added to cart successfully.');
+                return redirect()->back();
             }
+        }
+    }
 
-            return redirect()->back();
+    public function updateCart(Request $request)
+    {
+        $cart = session()->get('cart');
+        $cartId = $request->input('cartId');
+        $newQuantity = $request->input('quantity');
 
-        }else{//empty
-            //add to cart
-            $newCart[$pId]=[
-                    'id'=>$pId,
-                    'name'=>$product->name,
-                    'price'=>$product->price,
-                    'quantity'=>1,
-                    'subtotal'=>1 * $product->price,
-            ];
+        if (isset($cart[$cartId])) {
+            $cart[$cartId]['quantity'] = $newQuantity;
+            $cart[$cartId]['subtotal'] = $cart[$cartId]['price'] * $newQuantity;
+            session()->put('cart', $cart);
 
-            session()->put('vcart',$newCart);
-            notify()->success('Product added to cart successfully.');
-            return redirect()->back();
-
+            return response()->json(['success' => true]);
         }
 
-
-        return view('frontend.pages.cart.cartView');
+        return response()->json(['success' => false]);
     }
+
+    public function clearCart()
+    
+    {
+
+        session()->forget('cart');
+        notify()->success('Cart cleared.');
+        return redirect()->back();
+    }
+
+    public function deletecart($productId) 
+    {
+        $myCart = session()->get('cart', []);
+
+        if (isset($myCart[$productId])) {
+            unset($myCart[$productId]);
+            session()->put('cart', $myCart);
+            notify()->success('Item deleted from cart successfully.');
+        } else {
+            notify()->error('Item not found in cart.');
+        }
+    
+        return redirect()->back();
+    }
+
 }
 

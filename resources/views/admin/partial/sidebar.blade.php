@@ -15,12 +15,7 @@
                     <span>Users</span>
                 </a>
             </li>            
-            <li class="nav-item">
-                <a class="nav-link " href="">
-                    <i class="bi bi-grid"></i>
-                    <span>Orders</span>
-                </a>
-            </li>            
+                      
             <li class="nav-item">
                 <a class="nav-link " href="{{route('category.list')}}">
                     <i class="bi bi-grid"></i>
@@ -40,7 +35,7 @@
                 </a>
             </li>            
             <li class="nav-item">
-                <a class="nav-link " href="">
+                <a class="nav-link " href="{{route('order.list')}}">
                     <i class="bi bi-grid"></i>
                     <span>Order Details</span>
                 </a>
@@ -50,7 +45,9 @@
                     <i class="bi bi-grid"></i>
                     <span>Role</span>
                 </a>
-            </li>            
+            </li>     
+            
+            
 
             <!-- dropdown
             <li class="nav-item">

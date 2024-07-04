@@ -18,9 +18,9 @@ class Authenticate extends Middleware
 
         if ($this->auth->guard('customerGuard')->check() === false) {
             notify()->info('You need to login first');
-            return route('customer.login'); 
+            return route('customer.login');
         }
 
-        return route('admin.login'); 
+        return route('admin.login');
     }
 }

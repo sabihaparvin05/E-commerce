@@ -14,16 +14,18 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->string('status')->default('pending');
-            $table->double('total_price')->default(0.0);
-            $table->string('payment_method')->default('cod');
+            $table->string('name'); 
+            $table->string('email')->nullable(); 
+            $table->string('phone'); 
             $table->string('address');
+            $table->double('total_price')->default(0.0);
+            $table->string('status')->nullable();
             $table->string('receiver_mobile');
             $table->string('receiver_name');
-            $table->string('receiver_email')->nullable();
             $table->text('order_note')->nullable();
             $table->string('transaction_id')->unique();
-            $table->string('payment_status')->nullable(); 
+            $table->string('payment_method')->default('cod');
+            $table->string('payment_status')->default('pending');
             $table->timestamps(); 
         });
     }

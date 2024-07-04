@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('order_id')->constrained('orders');
             $table->foreignId('product_id')->constrained('products');
+            $table->double('unit_price');
             $table->integer('quantity');
             $table->double('subtotal');  
 

@@ -47,22 +47,24 @@
                 </div>
             </form>
         </div>
-        <div class="col-lg-3 col-6 text-right">
-            <a href="" class="btn border">
-                <i class="fas fa-heart text-primary"></i>
-                <span class="badge">0</span>
-            </a>
-            <a href="{{route('cart.view')}}" class="btn border">
-                <i class="fas fa-shopping-cart text-primary"></i>
-                <span class="badge">
-                    @if(session()->has('vcart'))
-                    {{ count(session()->get('vcart')) }}
-                    @else
-                    0
-                    @endif
-                </span>
-            </a>
-        </div>
+        <div class="col-lg-3 col-6 text-right d-flex align-items-center justify-content-end">
+    <!-- Language Selector -->
+    <select onchange="window.location.href=this.value;" name="language" id="language-selector" class="form-control" style="width: auto; margin-right: 10px;">
+        <option @if(session()->get('locale')=='en') selected @endif value="{{route('change.lang','en')}}">EN</option>
+        <option @if(session()->get('locale')=='bn') selected @endif value="{{route('change.lang','bn')}}">BN</option>
+        <option @if(session()->get('locale')=='ar') selected @endif value="{{route('change.lang','ar')}}">AR</option>
+    </select>
+
+    <!-- Shopping Cart Button -->
+    <a href="{{route('cart.view')}}" class="btn border">
+        <i class="fas fa-shopping-cart text-primary"></i>
+        <span class="badge">
+        ({{session()->get('cart') ? count(session()->get('cart')) : 0}})
+        </span>
+    </a>
+</div>
+
+
     </div>
 </div>
 <!-- Topbar End -->
@@ -85,14 +87,14 @@
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto py-0">
                         <a href="{{route('frontend.home')}}" class="nav-item nav-link active">{{__('Home')}}</a>
-                        <a href="shop.html" class="nav-item nav-link">{{__('Shop')}}</a>
-                        <a href="detail.html" class="nav-item nav-link">{{__('Shop Details')}}</a>
+                        <a href="shop.html" class="nav-item nav-link">{{__('About')}}</a>
+                       
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{__('Catagories')}}</a>
                             <div class="dropdown-menu rounded-0 m-0">
                                 @foreach($headerCategories as $category)
                                 <a href="{{route('products.under.category',$category->id)}}" class="dropdown-item">{{$category->name}}</a>
-                              
+
                                 @endforeach
                             </div>
                         </div>
@@ -100,8 +102,8 @@
                     </div>
                     @guest('customerGuard')
                     <div class="navbar-nav ml-auto py-0">
-                        <a href="{{route('customer.login')}}" class="nav-item nav-link">Login</a>
-                        <a href="{{route('customer.registration')}}" class="nav-item nav-link">Register</a>
+                        <a href="{{route('customer.login')}}" class="nav-item nav-link">{{__('Login')}}</a>
+                        <a href="{{route('customer.registration')}}" class="nav-item nav-link">{{__('Register')}}</a>
                         @endguest
                         @auth('customerGuard')
                         <div class="navbar-nav ml-auto py-0">
@@ -110,11 +112,7 @@
 
                             @endauth
 
-                            <select onchange="window.location.href=this.value;" name="" id="" class="form-control" style="width: min-content; margin: left 10px;">
-                                <option @if(session()->get('locale')=='en') selected @endif value="{{route('change.lang','en')}}">EN</option>
-                                <option @if(session()->get('locale')=='bn') selected @endif value="{{route('change.lang','bn')}}">BN</option>
-                                <option @if(session()->get('locale')=='ar') selected @endif value="{{route('change.lang','ar')}}">AR</option>
-                            </select>
+
                         </div>
                     </div>
             </nav>

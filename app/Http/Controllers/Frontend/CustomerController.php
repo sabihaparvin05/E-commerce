@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Role;
 use App\Models\User;
 use App\Mail\sendOtp;
+use App\Models\Order;
 use App\Mail\resetLink;
 use App\Models\Customer;
 use Illuminate\Support\Str;
@@ -25,7 +26,8 @@ class CustomerController extends Controller
     public function profile()
     {
         $user = Auth::guard('customerGuard')->user();
-        return view('frontend.pages.customer.profile', compact('user'));
+        $orders=Order::all();
+        return view('frontend.pages.customer.profile', compact('user','orders'));
     }
 
     public function profileEdit($userId)

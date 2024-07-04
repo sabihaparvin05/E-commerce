@@ -1,8 +1,10 @@
 {
     "Home": "হোম",
-    "Shop": "শপ",
-    "Shop Details": "শপ বিস্তারিত",
+    "About": "এবাউট",
+    
     "Catagories": "ক্যাটাগরি  ",
+    "Login": "লগইন ",
+    "Register": "রেজিস্ট্রার ",
     "Contact": " যোগাযোগ"
 
 }
