@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->string('receiver_mobile');
             $table->string('receiver_name');
+            $table->string('receiver_address');
             $table->text('order_note')->nullable();
             $table->string('transaction_id')->unique();
             $table->string('payment_method')->default('cod');

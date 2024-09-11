@@ -91,6 +91,11 @@
                     <input name="receiver_phone" type="text" class="form-control" id="receiverPhone" placeholder="Receiver's Phone Number" required>
                     <div class="invalid-feedback"> Please enter receiver's phone number. </div>
                 </div>
+                <div class="mb-3">
+                    <label for="receiverAddress">Receiver's Address</label>
+                    <input name="receiver_address" type="text" class="form-control" id="receiverAddress" placeholder="Receiver's Address" required>
+                    <div class="invalid-feedback"> Please enter receiver's address. </div>
+                </div>
 
                 <div class="mb-3">
                     <label for="OrderNote">Order Note</label>

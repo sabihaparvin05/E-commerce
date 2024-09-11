@@ -32,6 +32,7 @@ class OrderController extends Controller
             'address' => $request->address,
             'receiver_name' => $request->receiver_name,
             'receiver_mobile' => $request->receiver_phone,
+            'receiver_address' => $request->receiver_address,
             'order_note' => $request->order_note,
             'status' => 'pending',
             'total_price' => array_sum(array_column($cartData, 'subtotal')),

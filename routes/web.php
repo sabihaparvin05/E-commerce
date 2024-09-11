@@ -130,6 +130,9 @@ Route::group(['prefix' => 'admin'], function () {
             Route::put('/user/update/{id}', [UserController::class, 'update'])->name('user.update');
             Route::get('/user/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
 
+            Route::get('/customer/list', [UserController::class, 'customerList'])->name('customer.list');
+
+
             Route::get('/category/list', [CategoryController::class, 'list'])->name('category.list');
             Route::get('/create/category', [CategoryController::class, 'create'])->name('create.category');
             Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');

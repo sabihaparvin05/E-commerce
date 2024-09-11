@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Customer;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -158,5 +159,12 @@ class UserController extends Controller
     {
         auth()->logout();
         return redirect()->route('admin.login');
+    }
+
+
+public function customerList()
+    {
+        $customer = Customer::all();
+        return view('admin.pages.customer.list', compact('customer'));
     }
 }

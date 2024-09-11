@@ -38,7 +38,6 @@
                                         <th>product name</th>
                                         <th>Unit price</th>
                                         <th>Quantity</th>
-                                        <th>Subtotal</th>
                                         <th>Total</th>
                                     </tr>
                                 </thead>
@@ -49,7 +48,7 @@
                                         <td>{{ $data->unit_price }}</td>
                                         <td>{{ $data->quantity }}</td>
                                         <td>{{ $data->subtotal }}</td>
-                                        <td>{{ $data->order->total_price }}</td>
+                                        
                                     </tr>
                                     @endforeach
                                 </tbody>

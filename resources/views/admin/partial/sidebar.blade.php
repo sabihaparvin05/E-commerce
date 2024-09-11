@@ -14,6 +14,13 @@
                     <i class="bi bi-grid"></i>
                     <span>Users</span>
                 </a>
+            </li> 
+
+            <li class="nav-item">
+                <a class="nav-link " href="{{route('customer.list')}}">
+                    <i class="bi bi-grid"></i>
+                    <span>Customers</span>
+                </a>
             </li>            
                       
             <li class="nav-item">

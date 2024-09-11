@@ -35,7 +35,7 @@
                         <td>{{$data->phone}}</td>
                         <td>{{$data->address}}</td>
                         <td>{{$data->receiver_name}}</td>
-                        <td>{{$data->receiver_phone}}</td>
+                        <td>{{$data->receiver_mobile}}</td>
                         <td>{{$data->total_price}}</td>
                         <td>{{$data->transaction_id}}</td>
                         <td>{{$data->payment_method}}</td>
